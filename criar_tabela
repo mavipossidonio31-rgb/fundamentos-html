@@ -1,0 +1,137 @@
+/*criar tabela*/
+CREATE TABLE cliente (
+      id SERIAL PRIMARY KEY,
+      nome_completo VARCHAR(100) NOT NULL,
+      email VARCHAR(50) NOT NULL UNIQUE,
+      logradouro VARCHAR(150) NOT NULL,
+      bairro VARCHAR(50) NOT NULL, 
+      cidade VARCHAR(50) NOT NULL,
+      uf VARCHAR(2) NOT NULL,
+      cep VARCHAR(15) NOT NULL
+);
+
+/*listar todos os clientes*/
+SELECT * FROM cliente;
+
+/*cadastrar cliente*/
+INSERT INTO cliente
+(
+nome_completo, email, logradouro, bairro, cidade, uf, cep
+)
+VALUES
+(
+'cliente 01', 'cliente01@gmail.com',
+'rua das flores, 1000', 'centro',
+'saltinho', 'SP','13.401-906'
+);
+
+INSERT INTO cliente
+(
+nome_completo, email, logradouro, bairro, cidade, uf, cep
+)
+VALUES
+(
+'cliente 02', 'cliente02@gmail.com',
+'Av das palmas, 908,', 'centro',
+'rio das pedras', 'SP','13.401-140'
+);
+
+INSERT INTO cliente
+(
+nome_completo, email, logradouro, bairro, cidade, uf, cep
+)
+VALUES
+(
+'cliente 03', 'cliente03@gmail.com',
+'Rua dos cristais,', 'mario dedine',
+'piracicaba', 'SP','13.410-172'
+);
+
+INSERT INTO cliente
+(
+nome_completo, email, logradouro, bairro, cidade, uf, cep
+)
+VALUES
+(
+'cliente 04', 'cliente04@gmail.com',
+'Praça Quinze de Novembro 56,', 'Belo Campo',
+'Belo Campo', 'BA','45.160-970'
+);
+
+INSERT INTO cliente
+(
+nome_completo, email, logradouro, bairro, cidade, uf, cep
+)
+VALUES
+(
+'cliente 05', 'cliente05@gmail.com',
+'Rua Amaro Barreto,', 'Alecrim',
+'Natal', 'RN','59.031-450'
+);
+
+/*criar tabela de mensagem*/
+CREATE TABLE mensagem (
+      id SERIAL PRIMARY KEY,
+      texto TEXT NOT NULL,
+      cliente_id INTEGER REFERENCES cliente(id)
+);
+
+/*inserir registros*/
+INSERT INTO mensagem
+(texto, cliente_id)
+VALUES
+(
+      'quero um bolo de chocolate para comemorar meu aniversario!',
+      1
+);
+
+INSERT INTO mensagem
+(texto, cliente_id)
+VALUES
+(
+      'quero um bolo de morango!',
+      2
+);
+
+INSERT INTO mensagem
+(texto, cliente_id)
+VALUES
+(
+      'quero um bolo de ninho com nutella!',
+      3
+);
+
+INSERT INTO mensagem
+(texto, cliente_id)
+VALUES
+(
+      'quero um bolo de limão!',
+      4
+);
+
+
+/*mostra as mensagens*/
+SELECT * FROM mensagem;
+
+/*criar tabela de telefone*/
+CREATE TABLE telefone (
+      id SERIAL PRIMARY KEY,
+      telefone VARCHAR(20) NOT NULL,
+      cliente_id INTEGER  REFERENCES cliente(id)
+);
+
+/*inserir varios registros*/
+
+INSERT INTO telefone
+(telefone, cliente_id)
+VALUES
+('(19) 9 9934-1212', 1),
+('(19) 9 8989-1212', 1),
+('(19) 9 9788-1212', 1),
+('(19) 9 9090-1212', 4),
+('(19) 9 9090-1212', 4),
+('(78) 9 9090-1212', 5),
+('(24) 9 9090-1212', 8);
+
+/*Seleciona os telefones*/
+SELECT * FROM telefone;
